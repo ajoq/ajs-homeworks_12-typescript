@@ -10,4 +10,24 @@ export default class Cart {
     get items(): Buyable[] {
         return [...this._items]; 
     }
+
+    get sum(): number {
+        let sum = 0;
+        for (const item of this._items) {
+            sum += item.price;
+        }
+        return sum;
+    }
+
+    sumDiscount(discount: number) {
+        return this.sum - discount;
+    }
+
+    delete(id: number):void {
+        this._items.forEach((item, index, array) => {
+            if (id === item.id) {
+                array.splice(index, 1);
+            }
+        });
+    }
 }
