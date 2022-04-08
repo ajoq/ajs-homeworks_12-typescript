@@ -2,6 +2,7 @@ import Cart from '../service/Cart';
 import Book from '../domain/Book';
 import MusicAlbum from '../domain/MusicAlbum';
 import Movie from '../domain/Movie';
+import Gadget from '../domain/Gadget';
 
 test('new card should be empty', () => {
     const cart = new Cart();
@@ -90,5 +91,58 @@ test('cart remove', () => {
         }
     ]
       
+    expect(cart.items).toEqual(expected);
+});
+
+test('add gadget in cart', () => {
+    const cart = new Cart();
+    cart.add(new Gadget(120, 'Iphone', 120000, 1));
+    cart.add(new Gadget(120, 'Iphone', 120000, 5));
+
+    const expected = [
+        {
+            "id": 120,
+            "name": "Iphone",
+            "price": 720000,
+            "quantity": 6
+        }
+    ]
+    
+    expect(cart.items).toEqual(expected);
+});
+
+test('dublicate music album in cart', () => {
+    const cart = new Cart();
+    cart.add(new MusicAlbum(1008, 'Meteora', 'Linkin Park', 900));
+    cart.add(new MusicAlbum(1008, 'Meteora', 'Linkin Park', 900));
+
+    const expected = [
+        {
+            "id": 1008,
+            "name": "Meteora",
+            "author": "Linkin Park",
+            "price": 900
+        }
+    ]
+    
+    expect(cart.items).toEqual(expected);
+});
+
+test('change quantity gadgets in cart', () => {
+    const cart = new Cart();
+    cart.add(new Gadget(120, 'Iphone', 120000, 1));
+    cart.add(new Gadget(120, 'Iphone', 120000, 5));
+    cart.minus(120);
+    cart.minus(120);
+
+    const expected = [
+        {
+            "id": 120,
+            "name": "Iphone",
+            "price": 480000,
+            "quantity": 4
+        }
+    ]
+    
     expect(cart.items).toEqual(expected);
 });
