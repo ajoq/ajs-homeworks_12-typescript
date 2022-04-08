@@ -44,7 +44,7 @@ export default class Cart {
     }
 
     minus(id: number): void {
-        this._items.forEach((item, index, array) => {
+        this._items.forEach((item) => {
             if (id === item.id) {
 
                 if (item.quantity) {
