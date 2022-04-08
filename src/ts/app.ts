@@ -12,5 +12,6 @@ cart.add(new Movie(100, 'Мстители', 120, 2012, 'США', 'Avengers assem
 cart.add(new Gadget(120, 'Iphone', 120000, 1));
 cart.add(new Gadget(120, 'Iphone', 120000, 5));
 cart.add(new MusicAlbum(1008, 'Meteora', 'Linkin Park', 900));
+cart.minus(120);
 
 console.log(cart.items);

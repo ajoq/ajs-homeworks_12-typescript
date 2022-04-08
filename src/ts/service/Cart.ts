@@ -3,16 +3,11 @@ import Buyable from '../domain/Buyable';
 export default class Cart {
     private _items: Buyable[] = [];
 
-    // add(item: Buyable): void {
-    //     this._items.push(item);
-    // }
-
     add(item: Buyable): void {
 
         const currentItem = this._items.find(el => el.id === item.id);
 
         if (currentItem) {
-            console.log(`Товар уже в корзине, id: ${currentItem.id}`);
             
             if (item.quantity && currentItem.quantity) {
                 currentItem.quantity += item.quantity;
@@ -40,10 +35,23 @@ export default class Cart {
         return this.sum - discount;
     }
 
-    remove(id: number):void {
+    remove(id: number): void {
         this._items.forEach((item, index, array) => {
             if (id === item.id) {
                 array.splice(index, 1);
+            }
+        });
+    }
+
+    minus(id: number): void {
+        this._items.forEach((item, index, array) => {
+            if (id === item.id) {
+
+                if (item.quantity) {
+                    const piecePrice: number = item.price / item.quantity;
+                    item.quantity -= 1;
+                    item.price -= piecePrice;
+                }
             }
         });
     }
