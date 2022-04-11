@@ -8,12 +8,10 @@ export default class Cart {
         const currentItem = this._items.find(el => el.id === item.id);
 
         if (currentItem) {
-            
-            if (item.quantity && currentItem.quantity) {
-                currentItem.quantity += item.quantity;
-                currentItem.price = item.price * currentItem.quantity;
+            if (currentItem.quantity) {
+                currentItem.quantity += 1;
             }
-
+            
         } else {
             this._items.push(item);
         }
@@ -26,7 +24,7 @@ export default class Cart {
     get sum(): number {
         let sum = 0;
         for (const item of this._items) {
-            sum += item.price;
+            item.quantity ? sum += (item.price * item.quantity) : sum += item.price;
         }
         return sum;
     }
@@ -41,9 +39,10 @@ export default class Cart {
 
     minus(id: number): void {
         const itemId = this._items.find(el => el.id === id);
-        if (itemId && itemId.quantity) {
-            itemId.price -= itemId.price / itemId.quantity;
+        if (itemId && itemId.quantity && itemId.quantity > 1) {
             itemId.quantity -= 1; 
+        } else {
+            this.remove(id);
         }
     }
 }

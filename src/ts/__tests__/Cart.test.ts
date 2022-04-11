@@ -48,6 +48,20 @@ test('sum', () => {
     expect(cart.sum).toBe(expected);
 });
 
+test('sum with several gadgets', () => {
+    const cart = new Cart();
+    cart.add(new Book(1001, 'War and Piece', 'Leo Tolstoy', 2000, 1225));
+    cart.add(new MusicAlbum(1008, 'Meteora', 'Linkin Park', 900));
+    cart.add(new Movie(100, 'Мстители', 120, 2012, 'США', 'Avengers assemble!', ['фантастика', 'боевик', 'фэнтези', 'приключения'], 137));
+    cart.add(new Gadget(120, 'Iphone', 120000));
+    cart.add(new Gadget(120, 'Iphone', 120000));
+    cart.add(new Gadget(120, 'Iphone', 120000));
+  
+    const expected = 363020;
+      
+    expect(cart.sum).toBe(expected);
+});
+
 test('sum discount', () => {
     const cart = new Cart();
     cart.add(new Book(1001, 'War and Piece', 'Leo Tolstoy', 2000, 1225));
@@ -96,17 +110,17 @@ test('cart remove', () => {
 
 test('add gadget in cart', () => {
     const cart = new Cart();
-    cart.add(new Gadget(120, 'Iphone', 120000, 1));
-    cart.add(new Gadget(120, 'Iphone', 120000, 5));
-    cart.add(new Gadget(120, 'Iphone', 120000, 1));
-    cart.add(new Gadget(120, 'Iphone', 120000, 5));
+    cart.add(new Gadget(120, 'Iphone', 120000));
+    cart.add(new Gadget(120, 'Iphone', 120000));
+    cart.add(new Gadget(120, 'Iphone', 120000));
+    cart.add(new Gadget(120, 'Iphone', 120000));
 
     const expected = [
         {
             "id": 120,
             "name": "Iphone",
-            "price": 720000 + 720000,
-            "quantity": 6 + 6
+            "price": 120000,
+            "quantity": 4
         }
     ]
     
@@ -132,17 +146,17 @@ test('dublicate music album in cart', () => {
 
 test('change quantity gadgets in cart', () => {
     const cart = new Cart();
-    cart.add(new Gadget(120, 'Iphone', 120000, 1));
-    cart.add(new Gadget(120, 'Iphone', 120000, 5));
-    cart.minus(120);
+    cart.add(new Gadget(120, 'Iphone', 120000));
+    cart.add(new Gadget(120, 'Iphone', 120000));
+    cart.add(new Gadget(120, 'Iphone', 120000));
     cart.minus(120);
 
     const expected = [
         {
             "id": 120,
             "name": "Iphone",
-            "price": 480000,
-            "quantity": 4
+            "price": 120000,
+            "quantity": 2
         }
     ]
     
@@ -167,4 +181,24 @@ test('change quantity not gadgets in cart', () => {
     }
     
     expect(cart).toEqual(expected);
+});
+
+test('change quantity gadgets in cart to remove', () => {
+    const cart = new Cart();
+    cart.add(new MusicAlbum(1008, 'Meteora', 'Linkin Park', 900));
+    cart.add(new Gadget(120, 'Iphone', 120000));
+    cart.add(new Gadget(120, 'Iphone', 120000));
+    cart.minus(120);
+    cart.minus(120);
+
+    const expected = [
+        {
+            "id": 1008,
+            "name": "Meteora",
+            "author": "Linkin Park",
+            "price": 900
+        }
+    ]
+    
+    expect(cart.items).toEqual(expected);
 });
