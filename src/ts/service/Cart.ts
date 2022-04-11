@@ -11,7 +11,7 @@ export default class Cart {
             
             if (item.quantity && currentItem.quantity) {
                 currentItem.quantity += item.quantity;
-                currentItem.price *= currentItem.quantity;
+                currentItem.price = item.price * currentItem.quantity;
             }
 
         } else {

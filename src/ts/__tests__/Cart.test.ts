@@ -98,13 +98,15 @@ test('add gadget in cart', () => {
     const cart = new Cart();
     cart.add(new Gadget(120, 'Iphone', 120000, 1));
     cart.add(new Gadget(120, 'Iphone', 120000, 5));
+    cart.add(new Gadget(120, 'Iphone', 120000, 1));
+    cart.add(new Gadget(120, 'Iphone', 120000, 5));
 
     const expected = [
         {
             "id": 120,
             "name": "Iphone",
-            "price": 720000,
-            "quantity": 6
+            "price": 720000 + 720000,
+            "quantity": 6 + 6
         }
     ]
     
