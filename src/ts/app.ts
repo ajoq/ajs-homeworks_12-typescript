@@ -11,5 +11,14 @@ cart.add(new MusicAlbum(1008, 'Meteora', 'Linkin Park', 900));
 cart.add(new Movie(100, 'Мстители', 120, 2012, 'США', 'Avengers assemble!', ['фантастика', 'боевик', 'фэнтези', 'приключения'], 137));
 cart.add(new Gadget(120, 'Iphone', 120000, 1));
 cart.add(new Gadget(120, 'Iphone', 120000, 5));
+cart.add(new MusicAlbum(1008, 'Meteora', 'Linkin Park', 900));
+cart.add(new Book(1001, 'War and Piece', 'Leo Tolstoy', 2000, 1225));
 
 console.log(cart.items);
+cart.minus(120);
+cart.minus(120);
+
+// cart.minus(1001);
+
+// console.log(cart.items.map(item => item.id === 120))
+// // cart.items.map(item => item.id === id);

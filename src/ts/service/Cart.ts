@@ -35,24 +35,15 @@ export default class Cart {
         return this.sum - discount;
     }
 
-    remove(id: number): void {
-        this._items.forEach((item, index, array) => {
-            if (id === item.id) {
-                array.splice(index, 1);
-            }
-        });
+    remove(id: number):void {
+        this._items = this._items.filter(item => item.id != id);
     }
 
     minus(id: number): void {
-        this._items.forEach((item) => {
-            if (id === item.id) {
-
-                if (item.quantity) {
-                    const piecePrice: number = item.price / item.quantity;
-                    item.quantity -= 1;
-                    item.price -= piecePrice;
-                }
-            }
-        });
+        const itemId = this._items.find(el => el.id === id);
+        if (itemId && itemId.quantity) {
+            itemId.price -= itemId.price / itemId.quantity;
+            itemId.quantity -= 1; 
+        }
     }
 }

@@ -146,3 +146,23 @@ test('change quantity gadgets in cart', () => {
     
     expect(cart.items).toEqual(expected);
 });
+
+test('change quantity not gadgets in cart', () => {
+    const cart = new Cart();
+    cart.add(new Book(1001, 'War and Piece', 'Leo Tolstoy', 2000, 1225));
+    cart.minus(120);
+
+    const expected = {
+        "_items": [
+            {
+                "id": 1001,
+                "name": "War and Piece",
+                "author": "Leo Tolstoy",
+                "price": 2000,
+                "pages": 1225
+            }
+        ]
+    }
+    
+    expect(cart).toEqual(expected);
+});
